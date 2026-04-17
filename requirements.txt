@@ -1,0 +1,24 @@
+# BBC News Podcast Dependencies
+
+# Core
+requests>=2.31.0
+feedparser>=6.0.10
+beautifulsoup4>=4.12.0
+
+# AI
+openai>=1.0.0
+
+# Audio
+edge-tts>=6.1.0
+pydub>=0.25.1
+
+# Database (built-in sqlite3 - no install needed)
+
+# Web
+streamlit>=1.28.0
+
+# Scheduler
+apscheduler>=3.10.0
+
+# Utils
+python-dotenv>=1.0.0

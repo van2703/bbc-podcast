@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Data
+*.db
+data/*.json
+
+# Audio
+audio/episodes/*.mp3
+audio/temp/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
