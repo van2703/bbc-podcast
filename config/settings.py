@@ -42,6 +42,11 @@ AUDIO_OUTPUT_DIR = PROJECT_ROOT / "audio" / "episodes"
 WEB_PORT = 8501
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
+# Supabase
+USE_SUPABASE = os.getenv("USE_SUPABASE", "true").lower() == "true"
+SUPABASE_URL = os.getenv("SUPABASE_URL", "")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
+
 # Ensure directories exist
 DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
 AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
