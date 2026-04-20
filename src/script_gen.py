@@ -21,7 +21,7 @@ class ScriptGenerator:
 
     def __init__(self, api_key: str = OPENROUTER_API_KEY):
         self.api_key = api_key
-        self.model = "openai/gpt-4o"
+        self.model = "meta-llama/Llama-3.1-8B-Instruct"
         self.api_url = "https://openrouter.ai/api/v1/chat/completions"
 
     def generate_script(self, articles: List[Dict]) -> Dict:
@@ -113,27 +113,44 @@ Output JSON format:
         return {}
 
     def _fallback_script(self, articles: List[Dict]) -> Dict:
-        """Fallback script when AI fails."""
+        """Fallback script when AI fails - rule-based generation."""
         from datetime import datetime
 
-        article_titles = [a.get("title", "News")[:30] for a in articles[:3]]
-        titles_str = ", ".join(article_titles)
-
-        script = f"""Welcome to your daily BBC News podcast! I'm your host.
-
-Today we're covering: {titles_str}
-
-[News stories would be here in the full script]
-
-That's all for today. Thanks for listening, and see you tomorrow!
-
----
-Sources: BBC News Technology"""
-
+        today = datetime.now().strftime("%B %d, %Y")
+        
+        script_parts = [
+            f"Welcome to your daily BBC News podcast for {today}! I'm your host.",
+            "",
+            "In today's episode, we're covering the top stories from BBC Technology.",
+            ""
+        ]
+        
+        for i, article in enumerate(articles[:8], 1):
+            title = article.get("title", "Breaking News")
+            content = article.get("content", "")[:300]
+            
+            script_parts.append(f"Story {i}: {title}.")
+            if content:
+                script_parts.append(f"According to BBC News: {content}")
+            script_parts.append("")
+        
+        script_parts.extend([
+            "That's all for today's BBC News podcast.",
+            "Thanks for listening, and see you tomorrow!",
+            "",
+            "---",
+            "Sources: BBC News Technology"
+        ])
+        
+        script = "\n".join(script_parts)
+        
+        titles = [a.get("title", "News")[:40] for a in articles[:3]]
+        summary = " | ".join(titles)
+        
         return {
             "script": script,
             "title": f"BBC News Podcast - {datetime.now().strftime('%Y-%m-%d')}",
-            "summary": f"Daily news podcast covering {len(articles)} articles: {titles_str}",
+            "summary": summary,
         }
 
 

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class GitHubStorage:
     """Manage storage via GitHub Releases."""
 
-    def __init__(self, repo: str = GITHUB_REPO, token: str = GITHUB_TOKEN):
+    def __init__(self, repo: str = "van2703/bbc-podcast", token: str = GITHUB_TOKEN):
         self.repo = repo
         self.token = token
         self.api_url = f"https://api.github.com/repos/{repo}"

@@ -69,7 +69,7 @@ def run_pipeline():
         audio_data = tts.text_to_speech(script)
 
         audio_path = audio_data.get("file", "")
-        duration = audio_data.get("duration", 0)
+        duration = int(audio_data.get("duration", 0))
 
         logger.info(f"Audio generated: {audio_path}")
         logger.info(f"Duration: {duration // 60}m {duration % 60}s")
